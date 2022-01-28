@@ -2,7 +2,6 @@
 
 import * as model from './model.js';
 import View from './view.js';
-import 'core-js';
 import { LOGOUT_TIMER } from './config.js';
 
 const controlLogin = function (username, password) {
@@ -41,9 +40,7 @@ const controlTransfer = function (transferTo, amount) {
   const { activeUser } = model.state;
 
   // Check if receiver exists
-  const existingUser = model.state.accounts.find(
-    (account) => account.login === transferTo
-  );
+  const existingUser = model.state.accounts.find((account) => account.login === transferTo);
 
   if (!existingUser || existingUser === activeUser) return;
 
@@ -101,7 +98,7 @@ const controlLogout = function () {
   if (model.state.logoutTimerActivated) clearInterval(logoutID);
 
   // Update timer
-  logoutID = setInterval(() => {
+  const logoutID = setInterval(() => {
     logoutTimer--;
 
     let minutes = String(Math.trunc(logoutTimer / 60)).padStart(2, '0');
